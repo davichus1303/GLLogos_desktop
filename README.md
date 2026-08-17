@@ -1,60 +1,60 @@
 # GLogos Desktop
 
-Lector de la Biblia GTK4/libadwaita con selección de versión, libro,
-capítulo y versículo. Secciones por verso, scroll automático al verso
-seleccionado, importación de versiones propias (botón **+**), referencias
-y notas devocionales.
+Bible reader built with GTK4/libadwaita featuring version selection, book,
+chapter and verse navigation. Verse-based sections, auto-scroll to the
+selected verse, custom version import (**+** button), references
+and devotional notes.
 
-Este proyecto es **independiente** de la extensión GLogos. Solo comparten la
-carpeta de versiones locales (`XDG_DATA_HOME/glogos/versions`): las biblias
-que importes aquí también aparecen en la extensión y viceversa.
+This project is **independent** of the GLogos browser extension. They only
+share the local versions folder (`XDG_DATA_HOME/glogos/versions`): Bibles
+you import here also appear in the extension and vice versa.
 
-## Estructura
+## Structure
 
 ```
-app/                fuente de la app (main.js, window.js, widgets/, …)
-app/lib/            capa de datos (provider + normalización + libros/notas)
-app/widgets/        widgets GTK4 (reader, notes_panel, menu_button, …)
-install.sh          instalación solo para tu usuario
-build-deb.sh        empaquetado .deb (Debian/Ubuntu/Zorin)
-glogos.spec         empaquetado .rpm (Fedora/openSUSE)
+app/                app source (main.js, window.js, widgets/, …)
+app/lib/            data layer (provider + normalization + books/notes)
+app/widgets/        GTK4 widgets (reader, notes_panel, menu_button, …)
+install.sh          user-local installation
+build-deb.sh        .deb packaging (Debian/Ubuntu/Zorin)
+glogos.spec         .rpm packaging (Fedora/openSUSE)
 ```
 
-## Instalación
+## Installation
 
 ```bash
-./install.sh            # solo tu usuario (~/.local/share/glogos)
-sudo apt install ./dist/glogos-desktop_1.0.0_all.deb   # todo el sistema
+./install.sh            # user-local only (~/.local/share/glogos)
+sudo apt install ./dist/glogos-desktop_1.0.0_all.deb   # system-wide
 ```
 
-## Ejecución directa (desarrollo)
+## Direct run (development)
 
 ```bash
 gjs -m app/main.js
-gjs -m app/main.js --version reina-valera-1960 --book Génesis --chapter 1
+gjs -m app/main.js --version reina-valera-1960 --book Genesis --chapter 1
 ```
 
-## Funcionalidades
+## Features
 
-| Acción | Descripción |
+| Action | Description |
 |---|---|
-| **Seleccionar versión** | Elige entre las versiones bíblicas disponibles (web o locales importadas). |
-| **Seleccionar libro** | Lista los 66 libros del canon bíblico. |
-| **Seleccionar capítulo** | Navega al capítulo del libro elegido. |
-| **Seleccionar verso** | Hace scroll automático al verso dentro del capítulo. |
-| **Importar versión (+)** | Importa un archivo JSON con tu propia traducción bíblica (ver formato abajo). |
-| **Separador** | Guarda la referencia actual (versión + libro + capítulo) en la barra lateral izquierda. |
-| **Barra de referencias** | Lista las referencias guardadas. Haz clic para volver a esa lectura. Elimina referencias con el botón ✕. |
-| **Zoom +/-** | Ajusta el tamaño del texto (en la barra del Separador). |
-| **Navegación < >** | Capítulo anterior / siguiente (a los lados del texto bíblico). |
-| **Notas devocionales** | Escribe notas por verso, rango de versos o capítulo completo. Se guardan automáticamente. |
-| **Marcadores de color** | Marca versos con colores (rojo, rosa, verde, amarillo). |
-| **Versión web** | Lee cualquier capítulo desde [bible-api.com](https://bible-api.com) sin importar archivos. |
+| **Select version** | Choose from available Bible versions (web or imported local). |
+| **Select book** | Lists all 66 books of the standard biblical canon. |
+| **Select chapter** | Navigate to a chapter of the chosen book. |
+| **Select verse** | Auto-scrolls to the verse within the chapter. |
+| **Import version (+)** | Import a JSON file with your own Bible translation (see format below). |
+| **Separator** | Saves the current reference (version + book + chapter) to the left sidebar. |
+| **References bar** | Lists saved references. Click to return to that reading. Delete references with the ✕ button. |
+| **Zoom +/-** | Adjusts text size (in the Separator bar). |
+| **Navigation < >** | Previous / next chapter (flanking the biblical text). |
+| **Devotional notes** | Write notes per verse, verse range, or entire chapter. Saved automatically. |
+| **Color markers** | Mark verses with colors (red, pink, green, yellow). |
+| **Web version** | Read any chapter from [bible-api.com](https://bible-api.com) without importing files. |
 
-## Formato JSON para importar versiones bíblicas
+## JSON format for importing Bible versions
 
-El botón **+** en la barra superior abre un diálogo para importar un archivo
-`.json` con una traducción bíblica. El formato es:
+The **+** button in the top bar opens a dialog to import a `.json` file
+with a Bible translation. The format is:
 
 ```json
 {
@@ -62,18 +62,18 @@ El botón **+** en la barra superior abre un diálogo para importar un archivo
   "Year": 1960,
   "books": [
     {
-      "name": "Génesis",
+      "name": "Genesis",
       "capitulos": [
         {
           "numero": 1,
           "versos": [
             {
               "numero": 1,
-              "contenido": "En principio creó Dios los cielos y la tierra."
+              "contenido": "In the beginning God created the heavens and the earth."
             },
             {
               "numero": 2,
-              "contenido": "Y la tierra estaba sin forma y vacía..."
+              "contenido": "And the earth was formless and void..."
             }
           ]
         },
@@ -82,7 +82,7 @@ El botón **+** en la barra superior abre un diálogo para importar un archivo
           "versos": [
             {
               "numero": 1,
-              "contenido": "Fueron, pues, acabados los cielos..."
+              "contenido": "Thus the heavens and the earth were finished..."
             }
           ]
         }
@@ -92,29 +92,29 @@ El botón **+** en la barra superior abre un diálogo para importar un archivo
 }
 ```
 
-### Campos obligatorios
+### Required fields
 
-| Campo | Tipo | Descripción |
+| Field | Type | Description |
 |---|---|---|
-| `version` | string | Nombre de la versión (ej. "Reina Valera 1960"). Se usa como identificador. |
-| `books` | array | Lista de libros. Cada libro tiene `name` (string) y `capitulos` (array). |
-| `books[].name` | string | Nombre del libro. Debe coincidir con el canon bíblico estándar para que la app lo reconozca. |
-| `books[].capitulos` | array | Lista de capítulos. Cada uno tiene `numero` (int) y `versos` (array). |
-| `books[].capitulos[].numero` | int | Número del capítulo (1, 2, 3…). |
-| `books[].capitulos[].versos` | array | Lista de versos del capítulo. |
-| `books[].capitulos[].versos[].numero` | int | Número del verso (1, 2, 3…). |
-| `books[].capitulos[].versos[].contenido` | string | Texto del verso. |
+| `version` | string | Version name (e.g. "Reina Valera 1960"). Used as identifier. |
+| `books` | array | List of books. Each book has `name` (string) and `capitulos` (array). |
+| `books[].name` | string | Book name. Must match the standard biblical canon for the app to recognize it. |
+| `books[].capitulos` | array | List of chapters. Each has `numero` (int) and `versos` (array). |
+| `books[].capitulos[].numero` | int | Chapter number (1, 2, 3…). |
+| `books[].capitulos[].versos` | array | List of verses in the chapter. |
+| `books[].capitulos[].versos[].numero` | int | Verse number (1, 2, 3…). |
+| `books[].capitulos[].versos[].contenido` | string | Verse text. |
 
-### Campo opcional
+### Optional field
 
-| Campo | Tipo | Descripción |
+| Field | Type | Description |
 |---|---|---|
-| `Year` | int | Año de la traducción (ej. 1960). Informativo. |
+| `Year` | int | Translation year (e.g. 1960). Informational only. |
 
-### Notas devocionales
+### Devotional notes
 
-Las notas se guardan automáticamente dentro del JSON local bajo cada capítulo,
-en un campo `notas`:
+Notes are saved automatically inside the local JSON under each chapter,
+in a `notas` field:
 
 ```json
 {
@@ -123,7 +123,7 @@ en un campo `notas`:
   "notas": [
     {
       "id": "uuid",
-      "nota": "texto en **Markdown**",
+      "nota": "text in **Markdown**",
       "createdAt": "2026-01-15T10:30:00.000Z",
       "updatedAt": "2026-01-15T10:35:00.000Z",
       "versoInicio": 7,
@@ -133,42 +133,42 @@ en un campo `notas`:
 }
 ```
 
-- `versoInicio` / `versoFin`: presentes en notas de verso o rango.
-- Si no tienen `versoInicio`/`versoFin`, es una nota de capítulo completo.
-- Estos campos se generan automáticamente al escribir notas en la app.
+- `versoInicio` / `versoFin`: present for verse or range notes.
+- If absent, it is a chapter-level note.
+- These fields are generated automatically when writing notes in the app.
 
-### Nombres de libros soportados
+### Supported book names
 
-La app reconoce los 66 libros del canon bíblico protestante estándar.
-Algunos nombres válidos:
+The app recognizes all 66 books of the standard Protestant biblical canon.
+Some valid names:
 
 ```
-Génesis, Éxodo, Levítico, Números, Deuteronomio, Josué, Jueces,
-Rut, 1 Samuel, 2 Samuel, 1 Reyes, 2 Reyes, 1 Crónicas, 2 Crónicas,
-Esdras, Nehemías, Ester, Job, Salmos, Proverbios, Eclesiastés,
-Cantar de los Cantarios, Isaías, Jeremías, Lamentaciones, Ezequiel,
-Daniel, Oseas, Joel, Amós, Abdías, Jonás, Miqueas, Nahúm,
-Habacuc, Sofonías, Ageo, Zacarías, Malaquías,
-Mateo, Marcos, Lucas, Juan, Hechos, Romanos, 1 Corintios,
-2 Corintios, Gálatas, Efesios, Filipenses, Colosenses,
-1 Tesalonicenses, 2 Tesalonicenses, 1 Timoteo, 2 Timoteo,
-Tito, Filemón, Hebreos, Santiago, 1 Pedro, 2 Pedro,
-1 Juan, 2 Juan, 3 Juan, Judas, Apocalipsis
+Genesis, Exodus, Leviticus, Numbers, Deuteronomy, Joshua, Judges,
+Ruth, 1 Samuel, 2 Samuel, 1 Kings, 2 Kings, 1 Chronicles, 2 Chronicles,
+Ezra, Nehemiah, Esther, Job, Psalms, Proverbs, Ecclesiastes,
+Song of Solomon, Isaiah, Jeremiah, Lamentations, Ezekiel,
+Daniel, Hosea, Joel, Amos, Obadiah, Jonah, Micah, Nahum,
+Habakkuk, Zephaniah, Haggai, Zechariah, Malachi,
+Matthew, Mark, Luke, John, Acts, Romans, 1 Corinthians,
+2 Corinthians, Galatians, Ephesians, Philippians, Colossians,
+1 Thessalonians, 2 Thessalonians, 1 Timothy, 2 Timothy,
+Titus, Philemon, Hebrews, James, 1 Peter, 2 Peter,
+1 John, 2 John, 3 John, Jude, Revelation
 ```
 
-### Ejemplo mínimo
+### Minimal example
 
 ```json
 {
-  "version": "Mi Biblia",
+  "version": "My Bible",
   "books": [
     {
-      "name": "Juan",
+      "name": "John",
       "capitulos": [
         {
           "numero": 3,
           "versos": [
-            { "numero": 16, "contenido": "Porque de tal manera amó Dios al mundo..." }
+            { "numero": 16, "contenido": "For God so loved the world..." }
           ]
         }
       ]
@@ -177,16 +177,16 @@ Tito, Filemón, Hebreos, Santiago, 1 Pedro, 2 Pedro,
 }
 ```
 
-## Versionado
+## Versioning
 
-GLogos Desktop usa [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PATCH):
+GLogos Desktop uses [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PATCH):
 
-- **MAJOR**: cambios que rompen compatibilidad (formato JSON, interfaz completamente rediseñada).
-- **MINOR**: nuevas funcionalidades compatibles con versiones anteriores.
-- **PATCH**: corrección de bugs sin cambios funcionales.
+- **MAJOR**: breaking changes (JSON format, completely redesigned interface).
+- **MINOR**: new features backward-compatible with previous versions.
+- **PATCH**: bug fixes with no functional changes.
 
-Los paquetes `.deb` se generan con la versión completa.
+`.deb` packages are built with the full version string.
 
-## Licencia
+## License
 
 MIT.
