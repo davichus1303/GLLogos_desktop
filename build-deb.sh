@@ -3,7 +3,7 @@
 set -euo pipefail
 
 PKG_NAME="glogos-desktop"
-VERSION="1.0"
+VERSION="1.0.0"
 ARCH="all"
 
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
