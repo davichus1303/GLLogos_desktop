@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=GLogos
+Comment=Lectura de la Biblia: elige versión, libro, capítulo y versículo
+Exec=gjs -m %APP_PATH%
+Icon=org.glogos.app
+Type=Application
+Categories=Utility;
+Terminal=false

@@ -1,0 +1,19 @@
+# Build artifacts
+.build/
+dist/
+*.deb
+*.rpm
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Runtime
+*.log
